@@ -28,6 +28,8 @@ function ProfileSetupContent() {
     location: "",
     bio: "",
     availability: "",
+    volunteerHours: "",
+    volunteerHoursGoal: "", // NEW FIELD
   })
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,6 +151,40 @@ function ProfileSetupContent() {
                   onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
                 />
               </div>
+              {/* Total Volunteer Hours */}
+              <div className="space-y-2">
+                <Label htmlFor="volunteerHours">Total Volunteer Hours</Label>
+                <Input
+                  id="volunteerHours"
+                  type="number"
+                  min={0}
+                  placeholder="e.g., 120"
+                  value={formData.volunteerHours}
+                  onChange={(e) =>
+                    setFormData({ ...formData, volunteerHours: e.target.value })
+                  }
+                />
+                <p className="text-xs text-muted-foreground">
+                  Approximate number of hours you&apos;ve volunteered so far.
+                </p>
+              </div>
+              {/* NEW: Volunteer Hours Goal */}
+              <div className="space-y-2">
+                <Label htmlFor="volunteerHoursGoal">Volunteer Hours Goal</Label>
+                <Input
+                  id="volunteerHoursGoal"
+                  type="number"
+                  min={1}
+                  placeholder="e.g., 200"
+                  value={formData.volunteerHoursGoal}
+                  onChange={(e) =>
+                    setFormData({ ...formData, volunteerHoursGoal: e.target.value })
+                  }
+                />
+                <p className="text-xs text-muted-foreground">
+                  Set a target you&apos;d like to reach (e.g., 100, 200 hours).
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -180,7 +216,11 @@ function ProfileSetupContent() {
                   {skills.map((skill) => (
                     <Badge key={skill} variant="secondary" className="gap-1">
                       {skill}
-                      <button type="button" onClick={() => removeSkill(skill)} className="ml-1 hover:text-destructive">
+                      <button
+                        type="button"
+                        onClick={() => removeSkill(skill)}
+                        className="ml-1 hover:text-destructive"
+                      >
                         <X className="h-3 w-3" />
                       </button>
                     </Badge>
@@ -257,7 +297,9 @@ function ProfileSetupContent() {
                   ) : (
                     <div>
                       <p className="font-medium text-foreground">Click to upload resume</p>
-                      <p className="text-sm text-muted-foreground mt-1">PDF, DOC, or DOCX (max 10MB)</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        PDF, DOC, or DOCX (max 10MB)
+                      </p>
                     </div>
                   )}
                 </label>
@@ -270,7 +312,12 @@ function ProfileSetupContent() {
             <Button type="submit" size="lg" disabled={isLoading} className="flex-1">
               {isLoading ? "Saving..." : "Complete Profile"}
             </Button>
-            <Button type="button" size="lg" variant="outline" onClick={() => router.push("/explore")}>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={() => router.push("/explore")}
+            >
               Skip for Now
             </Button>
           </div>

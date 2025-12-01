@@ -15,6 +15,8 @@ export interface VolunteerProfile {
   interests: string[]
   availability?: string
   resumeUrl?: string
+  volunteerHours?: string 
+  volunteerHoursGoal?: string 
 }
 
 export interface Position {

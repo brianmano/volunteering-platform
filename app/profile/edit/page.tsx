@@ -28,6 +28,8 @@ function ProfileEditContent() {
     location: "",
     bio: "",
     availability: "",
+    volunteerHours: "",
+    volunteerHoursGoal: "", // NEW FIELD
   })
 
   useEffect(() => {
@@ -39,6 +41,8 @@ function ProfileEditContent() {
         location: profile.location || "",
         bio: profile.bio || "",
         availability: profile.availability || "",
+        volunteerHours: profile.volunteerHours || "",
+        volunteerHoursGoal: profile.volunteerHoursGoal || "",
       })
       setSkills(profile.skills || [])
       setInterests(profile.interests || [])
@@ -87,7 +91,7 @@ function ProfileEditContent() {
         const profile = {
           ...existingProfile,
           ...user,
-          ...formData,
+          ...formData, // includes volunteerHours & volunteerHoursGoal
           skills,
           interests,
           resumeUrl: resumeFile ? URL.createObjectURL(resumeFile) : existingProfile.resumeUrl,
@@ -165,6 +169,40 @@ function ProfileEditContent() {
                   onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
                 />
               </div>
+              {/* Total Volunteer Hours */}
+              <div className="space-y-2">
+                <Label htmlFor="volunteerHours">Total Volunteer Hours</Label>
+                <Input
+                  id="volunteerHours"
+                  type="number"
+                  min={0}
+                  placeholder="e.g., 120"
+                  value={formData.volunteerHours}
+                  onChange={(e) =>
+                    setFormData({ ...formData, volunteerHours: e.target.value })
+                  }
+                />
+                <p className="text-xs text-muted-foreground">
+                  Approximate number of hours you&apos;ve volunteered so far.
+                </p>
+              </div>
+              {/* NEW: Volunteer Hours Goal */}
+              <div className="space-y-2">
+                <Label htmlFor="volunteerHoursGoal">Volunteer Hours Goal</Label>
+                <Input
+                  id="volunteerHoursGoal"
+                  type="number"
+                  min={1}
+                  placeholder="e.g., 200"
+                  value={formData.volunteerHoursGoal}
+                  onChange={(e) =>
+                    setFormData({ ...formData, volunteerHoursGoal: e.target.value })
+                  }
+                />
+                <p className="text-xs text-muted-foreground">
+                  Set a target you&apos;d like to reach (e.g., 100, 200 hours).
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -196,7 +234,11 @@ function ProfileEditContent() {
                   {skills.map((skill) => (
                     <Badge key={skill} variant="secondary" className="gap-1">
                       {skill}
-                      <button type="button" onClick={() => removeSkill(skill)} className="ml-1 hover:text-destructive">
+                      <button
+                        type="button"
+                        onClick={() => removeSkill(skill)}
+                        className="ml-1 hover:text-destructive"
+                      >
                         <X className="h-3 w-3" />
                       </button>
                     </Badge>
@@ -273,7 +315,9 @@ function ProfileEditContent() {
                   ) : (
                     <div>
                       <p className="font-medium text-foreground">Click to upload resume</p>
-                      <p className="text-sm text-muted-foreground mt-1">PDF, DOC, or DOCX (max 10MB)</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        PDF, DOC, or DOCX (max 10MB)
+                      </p>
                     </div>
                   )}
                 </label>
@@ -286,7 +330,12 @@ function ProfileEditContent() {
             <Button type="submit" size="lg" disabled={isLoading} className="flex-1">
               {isLoading ? "Saving..." : "Save Changes"}
             </Button>
-            <Button type="button" size="lg" variant="outline" onClick={() => router.push("/profile")}>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={() => router.push("/profile")}
+            >
               Cancel
             </Button>
           </div>
