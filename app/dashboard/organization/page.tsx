@@ -192,7 +192,7 @@ const handleFormSubmit = (e: React.FormEvent) => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Heart className="h-6 w-6 text-primary" fill="currentColor" />
-            <span className="text-xl font-semibold">VolunteerHub</span>
+            <span className="text-xl font-semibold">VolunteerIn</span>
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">{user?.name}</span>

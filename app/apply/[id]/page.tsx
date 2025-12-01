@@ -77,7 +77,7 @@ function ApplyContent() {
           <div className="container mx-auto px-4 py-4">
             <Link href="/" className="flex items-center gap-2 w-fit">
               <Heart className="h-6 w-6 text-primary" fill="currentColor" />
-              <span className="text-xl font-semibold">VolunteerHub</span>
+              <span className="text-xl font-semibold">VolunteerIn</span>
             </Link>
           </div>
         </header>
