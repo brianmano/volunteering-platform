@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'VolunteerHub',
-  description: 'Enjoy',
+  title: 'VolunteerIn',
+  description: '#kudos',
   generator: 'v0.app',
   icons: {
     icon: '/icon.svg',
